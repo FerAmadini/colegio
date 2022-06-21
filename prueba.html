@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="Colegio.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-grid.min.css">
+    <script>document.addEventListener("DOMContentLoaded",()=>{
+        
+        var nuevoColegio=inicializarColegio()
+        dibujarColegio(nuevoColegio)
+            var cont=0
+            var interval = setInterval(()=>{
+                pasarCuatrimestre(nuevoColegio,cont)
+                dibujarColegio(nuevoColegio)
+                cont++
+                if(cont==4){
+                    clearInterval(interval)
+                }
+            },2000)
+        
+        
+    })
+    function dibujarColegio(colegio){
+        document.getElementById("container").innerHTML=`
+        <div class="colegio row" id="colegio"></div>`
+                    colegio.aulas.forEach(element => {
+                    var newdiv = document.createElement("div")
+                    newdiv.className = "aula col-md-12"
+                    newdiv.id="aula"+element.edadAula
+                    newdiv.innerHTML = element.edadAula
+                    document.getElementById("colegio").appendChild(newdiv)
+                    element.curso.forEach((alumno)=>{
+                        var alumnodiv = document.createElement("div")
+                        alumnodiv.className = "alumno"
+                        alumnodiv.innerHTML = alumno.nombre+" - "+alumno.conocimientos.join()
+                        document.getElementById("aula"+element.edadAula).appendChild(alumnodiv)
+                    })
+                        var docentediv = document.createElement("div")
+                        docentediv.className = "docente"
+                        docentediv.innerHTML = element.docente.nombre+" - "+element.docente.conocimientos.join()
+                        document.getElementById("aula"+element.edadAula).appendChild(docentediv)
+                })
+    }
+    function inicializarDocentes(){
+        var docente=[]
+        for(var cont=0;cont<9;cont++){
+            docente.push(new Docente(cont,["matemática","lengua","sociales","naturales"],cont))
+        }
+        return docente;
+    }
+    function inicializarColegio (){
+        var nuevoColegio = new Colegio (9)
+        var jose = new Alumno (8, "José")
+        var lujan = new Alumno (6, "Luján")
+        var fatima = new Alumno (5, "Fátima")
+        var eva = new Alumno (3, "Eva")
+        var guada = new Alumno (1, "Guadalupe")
+        var joaco = new Alumno (8, "Joaquín")
+        var docentes = inicializarDocentes()
+        nuevoColegio.ingreso([jose,lujan,fatima,eva,guada,joaco],docentes)
+        return nuevoColegio;
+    }
+    function pasarCuatrimestre (colegio,cuatri){
+        colegio.aulas.forEach((aula)=>{
+            var materia=aula.docente.conocimientos[cuatri]
+            aula.curso.forEach((alumno)=>{
+                alumno.aprender(materia)
+            })
+        })
+    }
+    
+    </script>
+    <style>
+        .colegio{
+            border: 2px solid black;
+        }
+        .aula{
+            border: 1px solid red;
+            margin: 10px;
+        }
+        .alumno{
+            border: 1px solid green;
+            margin: 10px;
+        }
+        .docente{
+            border: 2px solid gray;
+            margin: 10px;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <div id="container"></div>
+</body>
+</html>
