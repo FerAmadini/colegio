@@ -11,8 +11,8 @@ class Colegio{
         this.alumnos=alumnosIngresantes
         this.docentes=plantelDocente
         this.aulas.forEach((aula)=>{
-            var alumnosCurso = this.alumnos.filter((alumno)=>
-                alumno.edad == aula.edadAula
+            var alumnosCurso = this.alumnos.filter((alumnoActual)=>
+            alumnoActual.edad == aula.edadAula
             )
             aula.curso = alumnosCurso
             aula.docente = this.docentes.find((docente)=>
