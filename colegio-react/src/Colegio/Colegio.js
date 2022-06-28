@@ -4,15 +4,12 @@ import Alumno from '../Alumno/Alumno.js';
 import React from 'react';
 
 class Colegio extends React.Component{
-    aulas=[];
-    alumnos;
-    docentes;
     nombre="Para chicos";
     constructor(props){
         super(props)
         const aulas = []
         for(let cont = 0;cont < this.props.cantAulas;cont++){
-            aulas.push ({edadAula:cont, alumnos:[], docente:cont})
+            aulas.push ({edadAula:cont, curso:[], docente:cont})
         }
         this.state={nombre:this.nombre, aulas:aulas};
     }
@@ -37,21 +34,13 @@ class Colegio extends React.Component{
     egreso(){
         return this.alumnos
     }
-    crearAula(){
-        const aulas=[]
-        for(let cont = 0;cont < this.props.cantAulas;cont++){
-            console.log (this.state.aulas [cont])
-            const alumnos = this.state.aulas[cont].curso?.map((alumno)=>{
-                <Alumno nombre = {alumno.nombre} key={alumno.key} />
-            })
-            aulas.push (<Aula edadAula = {this.state.aulas [cont].edadAula}>{alumnos} </Aula>)
-        }
-        return aulas;
-    }
+    
     render(){
         return(
         <div className="colegio">Colegio {this.state.nombre}
-            {this.crearAula()}
+            {this.state.aulas.map((aula)=>
+                <Aula {...aula} />
+            )}
         </div>
         )
     }

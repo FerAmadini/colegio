@@ -7,17 +7,12 @@ class Aula extends React.Component{
     constructor(){
         super()
     }
-    mostrarAlumnos(){
-        const alumnos =[]
-        this.props.curso?.forEach((alumnoActual)=>{
-            alumnos.push (<Alumno />)
-        })
-        return alumnos
-    }
     render (){
         return (
             <div className="aula">Aula {this.props.edadAula}
-            {this.props.children}
+            {this.props.curso?.map((alumno)=>
+                <Alumno {...alumno} />
+            )}
             </div>
         )
     }

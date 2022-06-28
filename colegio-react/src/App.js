@@ -5,13 +5,13 @@ import Alumno from './Alumno/Alumno';
 import { useRef } from 'react';
 
 function App() {
-  const alumnos =  [{nombre:"José", key:"0"}, 
-                    {nombre:"Luján", key:"1"},
-                    {nombre:"Fátima", key:"2"},
-                    {nombre:"Eva", key:"3"},
-                    {nombre:"Guadalupe", key:"4"},
-                    {nombre:"Joaquín", key:"5"},
-                    {nombre:"Luciano", key:"6"},]
+  const alumnos =  [{nombre:"José", key:"0", edad:8}, 
+                    {nombre:"Luján", key:"1", edad:6},
+                    {nombre:"Fátima", key:"2", edad:5},
+                    {nombre:"Eva", key:"3", edad:3},
+                    {nombre:"Guadalupe", key:"4", edad:1},
+                    {nombre:"Joaquín", key:"5", edad:8},
+                    {nombre:"Luciano", key:"6", edad:5}]
   const colegio = useRef (null)
   const ingresar = ()=>{
     colegio.current.ingreso(alumnos,[])
@@ -20,7 +20,9 @@ function App() {
     <div className="App">
       App
       <Colegio ref={colegio} cantAulas={9} />
-      {alumnos}
+      {alumnos.map((alumno)=>
+        <div>{alumno.nombre}</div>
+      )}
       <button onClick={ingresar}>Ingreso</button>
     </div>
   );
