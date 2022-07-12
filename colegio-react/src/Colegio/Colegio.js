@@ -1,50 +1,57 @@
 import './colegio.css';
 import Aula from '../Aula/Aula.js'
 import Alumno from '../Alumno/Alumno.js';
-import React from 'react';
+import React, { useState } from 'react';
 
-class Colegio extends React.Component{
-    nombre="Para chicos";
-    constructor(props){
-        super(props)
-        const aulas = []
-        for(let cont = 0;cont < this.props.cantAulas;cont++){
-            aulas.push ({edadAula:cont, curso:[], docente:cont})
+function Colegio (props){
+    
+        const aulasNuevas = []
+        for(let cont = 0;cont < props.cantAulas;cont++){
+            aulasNuevas.push ({edadAula:cont, curso:[], docente:cont})
         }
-        this.state={nombre:this.nombre, aulas:aulas};
-    }
-    ingreso(alumnosIngresantes,plantelDocente){
-        console.log("aca")
-        this.alumnos=alumnosIngresantes
-        this.docentes=plantelDocente
-        const aulasActuales = this.state.aulas
+        //this.state={nombre:this.nombre, aulas:aulas};
+        const [nombre,setNombre] = useState ("Para chicos")
+        const [aulas,setAulas] = useState (aulasNuevas)
+
+        
+
+
+    const ingreso = () =>{
+
+        // aulas = [{edadAula: 0, curso: [{nombre: jose, edad: 0}]}, {edadAula: 1, curso: []}, {edadAula: 3, curso: []}]
+
+        const aulasActuales = [...aulas];
         aulasActuales.forEach((aula, index)=>{
-            var alumnosCurso = this.alumnos.filter((alumno)=>
+            var alumnosCurso = props.alumnosActuales.filter((alumno)=>
                 alumno.edad == aula.edadAula
             )
             aula.curso = alumnosCurso
-            aula.docente = this.docentes.find((docente)=>
+            aula.docente = props.plantelDocente.find((docente)=>
                 docente.edadCurso == aula.edadAula
             )
 
         })
-        this.setState({aulas:aulasActuales})
+        setAulas(aulasActuales)
 
     }
-    egreso(){
+    /*egreso(){
         return this.alumnos
+    }*/
+    const egreso = (egresados) =>{
+        return []
     }
-    
-    render(){
-        return(
-        <div className="colegio">Colegio {this.state.nombre}
-            {this.state.aulas.map((aula)=>
+
+    return(
+        <>
+        <div className="colegio">Colegio {nombre}
+            {aulas.map((aula)=>
                 <Aula {...aula} />
             )}
         </div>
-        )
+        <button onClick={ingreso}>Ingreso</button> 
+        </>
+    )
     }
-}
 
 /* function Colegio(){
     const MiColegio = new ColegioDTO (9)

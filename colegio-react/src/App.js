@@ -12,18 +12,22 @@ function App() {
                     {nombre:"Guadalupe", key:"4", edad:1},
                     {nombre:"Joaquín", key:"5", edad:8},
                     {nombre:"Luciano", key:"6", edad:5}]
-  const colegio = useRef (null)
-  const ingresar = ()=>{
-    colegio.current.ingreso(alumnos,[])
-  }
+
+  const docentes =[{nombre:"", key:"", catedra:""},
+                   {nombre:"", key:"", catedra:""},
+                   {nombre:"", key:"", catedra:""},
+                   {nombre:"", key:"", catedra:""},
+                   {nombre:"", key:"", catedra:""},
+                   {nombre:"", key:"", catedra:""}]
+
   return (
     <div className="App">
       App
-      <Colegio ref={colegio} cantAulas={9} />
+      <Colegio cantAulas={9} alumnosActuales={alumnos} plantelDocente={[]} />
       {alumnos.map((alumno)=>
         <div>{alumno.nombre}</div>
       )}
-      <button onClick={ingresar}>Ingreso</button>
+      
     </div>
   );
 }
