@@ -1,8 +1,9 @@
 import React from "react";
 import Alumno from "../Alumno/Alumno";
 import "./aula.css"
+import { AulaDTO } from '../models/commons';
 
- function Aula (props) {
+ function Aula (props:AulaDTO) {
     
     return (
             <>

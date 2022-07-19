@@ -1,17 +1,18 @@
 import './colegio.css';
-import Aula from '../Aula/Aula.js'
-import Alumno from '../Alumno/Alumno.js';
+import Aula from '../Aula/Aula'
+import Alumno from '../Alumno/Alumno';
 import React, { useState } from 'react';
+import { AulaDTO, AlumnoDTO, DocenteDTO } from '../models/commons';
 
-function Colegio (props){
+function Colegio (props:{cantAulas: number, alumnosActuales: AlumnoDTO[], plantelDocente: DocenteDTO[]}){
     
         const aulasNuevas = []
         for(let cont = 0;cont < props.cantAulas;cont++){
-            aulasNuevas.push ({edadAula:cont, curso:[], docente:cont})
+            aulasNuevas.push ({edadAula:cont, curso:[], docente:{}})
         }
         //this.state={nombre:this.nombre, aulas:aulas};
         const [nombre,setNombre] = useState ("Para chicos")
-        const [aulas,setAulas] = useState (aulasNuevas)
+        const [aulas,setAulas] = useState<AulaDTO[]>(aulasNuevas)
 
         
 
@@ -22,13 +23,13 @@ function Colegio (props){
 
         const aulasActuales = [...aulas];
         aulasActuales.forEach((aula, index)=>{
-            var alumnosCurso = props.alumnosActuales.filter((alumno)=>
+            var alumnosCurso = props.alumnosActuales.filter((alumno:AlumnoDTO)=>
                 alumno.edad == aula.edadAula
             )
             aula.curso = alumnosCurso
-            aula.docente = props.plantelDocente.find((docente)=>
-                docente.edadCurso == aula.edadAula
-            )
+            aula.docente = props.plantelDocente.find((docente:DocenteDTO)=>
+                docente.nombre == aula.edadAula
+            ) as DocenteDTO
 
         })
         setAulas(aulasActuales)
@@ -37,11 +38,11 @@ function Colegio (props){
     /*egreso(){
         return this.alumnos
     }*/
-    const egreso = (egresados) =>{
+    const egreso = (egresados:unknown) =>{
         return []
     }
 
-    return(
+    return( 
         <>
         <div className="colegio">Colegio {nombre}
             {aulas.map((aula)=>
@@ -52,6 +53,8 @@ function Colegio (props){
         </>
     )
     }
+
+
 
 /* function Colegio(){
     const MiColegio = new ColegioDTO (9)
