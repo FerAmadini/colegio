@@ -1,6 +1,7 @@
 export interface AlumnoDTO{
     nombre: string,
-    edad: number
+    edad: number,
+    conocimientos: string[]
 }
 
 export interface AulaDTO{

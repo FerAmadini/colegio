@@ -3,13 +3,13 @@ import Colegio from './Colegio/Colegio';
 
 
 function App() {
-  const alumnos =  [{nombre:"José", key:"0", edad:8}, 
-                    {nombre:"Luján", key:"1", edad:6},
-                    {nombre:"Fátima", key:"2", edad:5},
-                    {nombre:"Eva", key:"3", edad:3},
-                    {nombre:"Guadalupe", key:"4", edad:1},
-                    {nombre:"Joaquín", key:"5", edad:8},
-                    {nombre:"Luciano", key:"6", edad:5}]
+  const alumnos =  [{nombre:"José", key:"0", edad:8, conocimientos:[]}, 
+                    {nombre:"Luján", key:"1", edad:6, conocimientos:[]},
+                    {nombre:"Fátima", key:"2", edad:5, conocimientos:[]},
+                    {nombre:"Eva", key:"3", edad:3, conocimientos:[]},
+                    {nombre:"Guadalupe", key:"4", edad:1, conocimientos:[]},
+                    {nombre:"Joaquín", key:"5", edad:8, conocimientos:[]},
+                    {nombre:"Luciano", key:"6", edad:5, conocimientos:[]}]
 
   const docentes =[{nombre:0, key:0, catedra:['Lengua ', 'quimica ', 'fisica ']},
                    {nombre:1, key:1, catedra:['Lengua ', 'quimica ', 'fisica ']},

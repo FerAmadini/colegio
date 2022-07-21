@@ -13,6 +13,7 @@ function Colegio (props:{cantAulas: number, alumnosActuales: AlumnoDTO[], plante
         //this.state={nombre:this.nombre, aulas:aulas};
         const [nombre,setNombre] = useState ("Para chicos")
         const [aulas,setAulas] = useState<AulaDTO[]>(aulasNuevas)
+        const [cuatrimestre, setCuatrimestre] = useState (0)
 
         
 
@@ -35,6 +36,19 @@ function Colegio (props:{cantAulas: number, alumnosActuales: AlumnoDTO[], plante
         setAulas(aulasActuales)
 
     }
+
+    const aprender = () =>{
+        aulas.forEach((aula)=>{
+            //@ts-ignore
+            const saber = aula.docente.catedra[cuatrimestre]
+            aula.curso.forEach((alumno)=>{
+                alumno.conocimientos.push(saber)
+            })
+        })
+        if(cuatrimestre < 3){
+        setCuatrimestre (cuatrimestre + 1)
+        }
+    }
     /*egreso(){
         return this.alumnos
     }*/
@@ -49,9 +63,11 @@ function Colegio (props:{cantAulas: number, alumnosActuales: AlumnoDTO[], plante
                 <Aula {...aula} />
             )}
         </div>
-        <button onClick={ingreso}>Ingreso</button> 
+        <button onClick={ingreso}>Ingreso</button>
+        <button onClick={aprender}>Pasar Cuatrimestre</button>
         </>
     )
+
     }
 
 
