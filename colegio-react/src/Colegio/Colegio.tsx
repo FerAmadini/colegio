@@ -45,6 +45,7 @@ function Colegio (props:{cantAulas: number, alumnosActuales: AlumnoDTO[], plante
                 alumno.conocimientos.push(saber)
             })
         })
+        setAulas([...aulas])
         if(cuatrimestre < 3){
         setCuatrimestre (cuatrimestre + 1)
         }
